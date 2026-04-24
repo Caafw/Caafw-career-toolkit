@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Pit Stop Career Toolkit — Riya</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* --------- RESET --------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      line-height: 1.5;
+      color: #0F172A;
+      background: #0B1020;
+      padding: 32px 12px 48px;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    :root {
+      --bg: #020617;
+      --bg-alt: #020617;
+      --card: #020617;
+      --card-border: rgba(148, 163, 184, 0.25);
+      --muted: #9CA3AF;
+      --accent: #22C55E;
+      --accent-soft: rgba(34, 197, 94, 0.08);
+      --accent-strong: rgba(34, 197, 94, 0.55);
+      --accent-border: rgba(74, 222, 128, 0.65);
+      --ring: rgba(125, 211, 252, 0.7);
+      --primary: #F9FAFB;
+      --primary-soft: #111827;
+      --shadow-soft: 0 24px 80px rgba(15, 23, 42, 0.85);
+      --shadow-subtle: 0 10px 40px rgba(15, 23, 42, 0.6);
+      --pill-bg: rgba(15, 23, 42, 0.92);
+      --pill-border: rgba(148, 163, 184, 0.45);
+      --divider: rgba(148, 163, 184, 0.4);
+      --code-bg: #020617;
+      --badge: #1F2937;
+      --badge-border: rgba(55, 65, 81, 0.8);
+      --tag-bg: rgba(17, 24, 39, 0.95);
+      --tag-border: rgba(55, 65, 81, 0.85);
+      --pill-soft: rgba(17, 24, 39, 0.95);
+      --pill-soft-border: rgba(55, 65, 81, 0.9);
+      --muted-soft: rgba(148, 163, 184, 0.8);
+      --scroll-thumb: rgba(148, 163, 184, 0.7);
+      --scroll-track: rgba(15, 23, 42, 0.95);
+    }
+    @media (min-width: 768px) {
+      body {
+        padding: 40px 24px 60px;
+      }
+    }
+    @media (min-width: 1024px) {
+      body {
+        padding: 48px 32px 72px;
+      }
+    }
+
+    /* --------- LAYOUT --------- */
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .card {
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.1) 0, transparent 55%), radial-gradient(circle at 20% 120%, rgba(34, 197, 94, 0.14) 0, transparent 55%), radial-gradient(circle at 80% 120%, rgba(56, 189, 248, 0.16) 0, transparent 55%), linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+      border-radius: 28px;
+      padding: 26px 20px 24px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      color: var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .card {
+        padding: 30px 28px 26px;
+        border-radius: 28px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .card {
+        border-radius: 30px;
+        padding: 32px 30px 28px;
+      }
+    }
+    .glow-orbit {
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 20%, rgba(34, 197, 94, 0.16) 0, transparent 55%),
+        radial-gradient(circle at 100% 80%, rgba(56, 189, 248, 0.16) 0, transparent 55%),
+        radial-gradient(circle at 50% 0%, rgba(94, 234, 212, 0.13) 0, transparent 60%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .card-border-orbit {
+      position: absolute;
+      inset: -1px;
+      border-radius: 28px;
+      pointer-events: none;
+      z-index: 0;
+      border: 1px solid transparent;
+      background:
+        linear-gradient(135deg, rgba(148, 163, 184, 0.9), rgba(148, 163, 184, 0.35)) border-box;
+      -webkit-mask:
+        linear-gradient(#000 0 0) padding-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.95;
+    }
+    @media (min-width: 768px) {
+      .card-border-orbit {
+        border-radius: 28px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .card-border-orbit {
+        border-radius: 30px;
+      }
+    }
+    .card-orbit-accent {
+      position: absolute;
+      inset: -1px;
+      border-radius: 28px;
+      pointer-events: none;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 5% 15%, rgba(56, 189, 248, 0.35) 0, transparent 55%),
+        radial-gradient(circle at 95% 85%, rgba(34, 197, 94, 0.4) 0, transparent 60%);
+      opacity: 0.55;
+      mix-blend-mode: screen;
+    }
+    @media (min-width: 768px) {
+      .card-orbit-accent {
+        border-radius: 28px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .card-orbit-accent {
+        border-radius: 30px;
+      }
+    }
+    .card-contents {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* --------- HEADER --------- */
+    .header-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .header-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 18px;
+        margin-bottom: 20px;
+      }
+    }
+    .header-main {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .top-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+      align-items: center;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(226, 232, 240, 0.9);
+      background: rgba(15, 23, 42, 0.98);
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.8);
+    }
+    .badge-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(45, 212, 191, 1);
+      box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.28);
+    }
+    .badge-subtle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.9);
+      background: rgba(15, 23, 42, 0.96);
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.9);
+    }
+    .badge-subtle-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(96, 165, 250, 1);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.3);
+    }
+    .header-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 10px;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    h1 {
+      font-size: 22px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: rgba(249, 250, 251, 0.98);
+    }
+    @media (min-width: 640px) {
+      h1 {
+        font-size: 23px;
+      }
+    }
+    .header-title-tag {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 3px 8px 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      color: rgba(209, 213, 219, 0.98);
+      background: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.25) 0, transparent 55%), rgba(15, 23, 42, 0.98);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .header-title-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(74, 222, 128, 0.85);
+      box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.3);
+    }
+    .header-subtitle {
+      font-size: 13px;
+      color: rgba(209, 213, 219, 0.9);
+      max-width: 620px;
+    }
+    @media (min-width: 640px) {
+      .header-subtitle {
+        font-size: 13px;
+      }
+    }
+    .header-subtitle strong {
+      color: #E5E7EB;
+      font-weight: 600;
+    }
+    .header-side {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    @media (min-width: 768px) {
+      .header-side {
+        align-items: flex-end;
+        text-align: right;
+      }
+    }
+    .metadata-pill {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 11px 5px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: rgba(209, 213, 219, 0.98);
+      background: rgba(15, 23, 42, 0.98);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 32px rgba(15, 23, 42, 0.9);
+    }
+    .metadata-pill-label {
+      font-size: 11px;
+      opacity: 0.7;
+      text-transform: uppercase;
+    }
+    .metadata-pill-value {
+      font-weight: 600;
+      letter-spacing: 0.16em;
+    }
+    .location-line {
+      font-size: 12px;
+      color: rgba(156, 163, 175, 0.94);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .location-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(96, 165, 250, 1);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.32);
+    }
+    @media (max-width: 767px) {
+      .location-line {
+        margin-top: 2px;
+      }
+    }
+
+    /* Divider */
+    .divider {
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      margin: 14px 0 18px;
+    }
+    @media (min-width: 640px) {
+      .divider {
+        margin: 16px 0 20px;
+      }
+    }
+
+    /* Top summary row */
+    .top-summary-row {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 14px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+    @media (max-width: 767px) {
+      .top-summary-row {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+      }
+    }
+    .top-summary-main {
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.95);
+    }
+    .top-summary-main strong {
+      color: #E5E7EB;
+      font-weight: 600;
+    }
+    .top-summary-highlight {
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: rgba(226, 232, 240, 0.98);
+      font-weight: 500;
+    }
+    .top-summary-main p + p {
+      margin-top: 7px;
+    }
+    .top-summary-side {
+      padding: 10px 11px 9px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.16) 0, transparent 55%), rgba(15, 23, 42, 0.96);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.75);
+    }
+    @media (min-width: 768px) {
+      .top-summary-side {
+        padding: 11px 12px 10px;
+      }
+    }
+    .top-summary-side-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.9);
+      margin-bottom: 6px;
+    }
+    .top-summary-side-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .top-summary-side-role {
+      font-size: 11px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: rgba(226, 232, 240, 0.98);
+    }
+    .top-summary-side-target {
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.98);
+      font-weight: 500;
+    }
+    .top-summary-side-sub {
+      font-size: 11px;
+      color: rgba(156, 163, 175, 1);
+      margin-top: 4px;
+    }
+
+    /* Two-column main layout */
+    .columns {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+    @media (max-width: 767px) {
+      .columns {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Column base */
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Sections */
+    .section {
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      box-shadow: var(--shadow-subtle);
+      padding: 12px 13px 11px;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .section {
+        border-radius: 18px;
+        padding: 13px 14px 12px;
+      }
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(209, 213, 219, 0.98);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .section-title-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(74, 222, 128, 0.9);
+      box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.3);
+    }
+    .section-subtitle {
+      font-size: 11px;
+      color: rgba(148, 163, 184, 0.95);
+    }
+
+    /* Experience / pitch block */
+    .pill {
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 9px 10px 9px;
+      margin-top: 3px;
+    }
+    .pill-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.9);
+      margin-bottom: 5px;
+    }
+    .pill-body {
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.95);
+    }
+    .pill-body strong {
+      color: #E5E7EB;
+      font-weight: 600;
+    }
+    .pill-body + .pill-body {
+      margin-top: 6px;
+    }
+
+    /* Bullet lists */
+    .list {
+      list-style: none;
+      margin-top: 6px;
+    }
+    .list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.95);
+    }
+    .list-item + .list-item {
+      margin-top: 4px;
+    }
+    .list-bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      margin-top: 6px;
+      flex-shrink: 0;
+      background: rgba(148, 163, 184, 0.9);
+    }
+    .list-item strong {
+      color: #E5E7EB;
+      font-weight: 600;
+    }
+
+    /* Highlight strip */
+    .highlight-strip {
+      border-radius: 13px;
+      border: 1px solid rgba(74, 222, 128, 0.7);
+      background: linear-gradient(135deg, rgba(22, 163, 74, 0.15), rgba(15, 23, 42, 0.98));
+      padding: 8px 10px 9px;
+      margin-top: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .highlight-strip-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(187, 247, 208, 0.95);
+      margin-bottom: 4px;
+    }
+    .highlight-strip-body {
+      font-size: 12px;
+      color: rgba(209, 250, 229, 0.98);
+    }
+    .highlight-strip-body strong {
+      color: #ECFDF5;
+      font-weight: 600;
+    }
+
+    /* Companies table */
+    .companies-table-wrapper {
+      margin-top: 6px;
+      border-radius: 13px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.98);
+    }
+    .companies-table-header {
+      display: grid;
+      grid-template-columns: 1.4fr 1.4fr 3fr 1.1fr;
+      gap: 6px;
+      padding: 6px 10px 4px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.98);
+      border-bottom: 1px solid rgba(55, 65, 81, 0.85);
+      background: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18) 0, transparent 55%), rgba(15, 23, 42, 0.98);
+    }
+    .companies-table-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1.4fr 3fr 1.1fr;
+      gap: 6px;
+      padding: 6px 10px 6px;
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.97);
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+    }
+    .companies-table-row:last-child {
+      border-bottom: none;
+    }
+    .companies-company {
+      font-weight: 600;
+      color: rgba(226, 232, 240, 0.98);
+    }
+    .companies-role {
+      color: rgba(209, 213, 219, 0.97);
+    }
+    .companies-why {
+      color: rgba(156, 163, 175, 0.98);
+    }
+    .companies-fit {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(248, 250, 252, 0.98);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .fit-very-strong {
+      color: rgba(34, 197, 94, 0.98);
+    }
+    .fit-strong {
+      color: rgba(52, 211, 153, 0.98);
+    }
+    .fit-good {
+      color: rgba(94, 234, 212, 0.98);
+    }
+
+    /* Compensation section */
+    .comp-block {
+      margin-top: 6px;
+      border-radius: 13px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.98);
+      padding: 8px 10px 8px;
+    }
+    .comp-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.8fr) minmax(0, 2.7fr);
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.98);
+    }
+    .comp-row + .comp-row {
+      margin-top: 4px;
+    }
+    .comp-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.98);
+    }
+    .comp-value {
+      font-weight: 500;
+      color: rgba(226, 232, 240, 0.98);
+    }
+    .comp-note {
+      font-size: 11px;
+      color: rgba(156, 163, 175, 0.98);
+    }
+    .comp-highlight {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px dashed rgba(55, 65, 81, 0.9);
+      font-size: 12px;
+      color: rgba(209, 250, 229, 0.98);
+    }
+    .comp-highlight strong {
+      color: #ECFDF5;
+      font-weight: 600;
+    }
+
+    /* Actions list */
+    .numbered-list {
+      margin-top: 6px;
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.97);
+    }
+    .numbered-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .numbered-item + .numbered-item {
+      margin-top: 6px;
+    }
+    .numbered-index {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: rgba(209, 213, 219, 0.98);
+      background: rgba(15, 23, 42, 0.98);
+    }
+    .numbered-body strong {
+      color: #E5E7EB;
+      font-weight: 600;
+    }
+
+    /* Templates list */
+    .templates-pill {
+      border-radius: 13px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.98);
+      padding: 8px 10px 8px;
+      margin-top: 6px;
+    }
+    .templates-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.95);
+      margin-bottom: 4px;
+    }
+    .templates-body {
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.97);
+    }
+    .templates-body strong {
+      color: #E5E7EB;
+      font-weight: 600;
+    }
+
+    /* Transition section */
+    .transition-block {
+      margin-top: 6px;
+      border-radius: 13px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.98);
+      padding: 8px 10px 8px;
+    }
+    .transition-line {
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.97);
+    }
+    .transition-line + .transition-line {
+      margin-top: 5px;
+    }
+    .transition-line strong {
+      color: #E5E7EB;
+      font-weight: 600;
+    }
+
+    /* Timeline section */
+    .timeline-block {
+      margin-top: 6px;
+      border-radius: 13px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.98);
+      padding: 8px 10px 8px;
+    }
+    .timeline-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 3.5fr);
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.97);
+    }
+    .timeline-row + .timeline-row {
+      margin-top: 4px;
+    }
+    .timeline-label {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.98);
+    }
+
+    /* Risk block */
+    .risk-block {
+      margin-top: 6px;
+      border-radius: 13px;
+      border: 1px solid rgba(239, 68, 68, 0.8);
+      background: linear-gradient(135deg, rgba(127, 29, 29, 0.35), rgba(15, 23, 42, 0.98));
+      padding: 8px 10px 8px;
+    }
+    .risk-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(254, 226, 226, 0.98);
+      margin-bottom: 4px;
+    }
+    .risk-body {
+      font-size: 12px;
+      color: rgba(254, 242, 242, 0.98);
+    }
+    .risk-body strong {
+      color: #FEF2F2;
+      font-weight: 600;
+    }
+
+    /* Search block */
+    .search-block {
+      margin-top: 6px;
+      border-radius: 13px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.98);
+      padding: 8px 10px 8px;
+    }
+    .search-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.95);
+      margin-bottom: 4px;
+    }
+    .search-body {
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.97);
+    }
+    .search-body strong {
+      color: #E5E7EB;
+      font-weight: 600;
+    }
+
+    /* Toolkit footer */
+    .toolkit-footer {
+      margin-top: 8px;
+      border-radius: 13px;
+      border: 1px dashed rgba(148, 163, 184, 0.9);
+      background: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.22) 0, transparent 60%), rgba(15, 23, 42, 0.98);
+      padding: 8px 10px 8px;
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.97);
+    }
+    .toolkit-footer strong {
+      color: #E5E7EB;
+      font-weight: 600;
+    }
+    .toolkit-footer-code {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      color: rgba(226, 232, 240, 0.98);
+    }
+
+    /* Code block styling for snippet */
+    pre {
+      margin-top: 6px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      font-size: 11px;
+      color: rgba(226, 232, 240, 0.98);
+      overflow-x: auto;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.8);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.95);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="glow-orbit" aria-hidden="true"></div>
+      <div class="card-border-orbit" aria-hidden="true"></div>
+      <div class="card-orbit-accent" aria-hidden="true"></div>
+      <div class="card-inner">
+        <div class="card-contents">
+
+          <!-- Header -->
+          <header class="header-row">
+            <div class="header-main">
+              <div class="top-badge-row">
+                <div class="badge-pill">
+                  <div class="badge-pill-dot"></div>
+                  PIT STOP CAREER TOOLKIT
+                </div>
+                <div class="badge-subtle">
+                  <div class="badge-subtle-dot"></div>
+                  DATA → PRODUCT MANAGER TRANSITION PLAN
+                </div>
+              </div>
+
+              <div class="header-title-row">
+                <h1>Riya — London Data → PM Career Toolkit</h1>
+                <div class="header-title-tag">
+                  <div class="header-title-tag-dot"></div>
+                  Built by Claude in 60 seconds
+                </div>
+              </div>
+
+              <p class="header-subtitle">
+                Data professional with five years of experience turning complex datasets into commercial decisions at Unilever and Kantar. Proficient in Python, SQL, and Tableau — with a track record of building dashboards and analytical models used by senior leadership to drive £multi-million product decisions. Now transitioning into product management, where analytical rigour, stakeholder communication, and commercial instinct translate directly into stronger product discovery, prioritisation, and measurement. Seeking a data-adjacent PM or Associate PM role at a growth-stage tech company or established product organisation in London. British citizen. Available immediately.
+              </p>
+            </div>
+
+            <div class="header-side">
+              <div class="metadata-pill">
+                <span class="metadata-pill-label">Generated for</span>
+                <span class="metadata-pill-value">RIYA</span>
+              </div>
+              <div class="location-line">
+                <div class="location-dot"></div>
+                London · Data → PM transition · Target: Q3 offer
+              </div>
+            </div>
+          </header>
+
+          <div class="divider"></div>
+
+          <!-- Top summary row -->
+          <section class="top-summary-row">
+            <div class="top-summary-main">
+              <p class="top-summary-highlight">
+                The CV is strong on data — we need to surface the product decisions you already influence and turn that into a product story.
+              </p>
+              <p>
+                Right now, the CV reads as: <strong>“I build dashboards and run analysis.”</strong> The reality is closer to: <strong>“I’ve spent five years informing product, pricing, and go-to-market decisions at Unilever and Kantar.”</strong> This toolkit reframes your experience so hiring managers see you as an emerging product manager, not “just” a data analyst.
+              </p>
+            </div>
+            <div class="top-summary-side">
+              <div class="top-summary-side-label">Primary transition path</div>
+              <div class="top-summary-side-row">
+                <div class="top-summary-side-role">DATA ANALYST → PRODUCT MANAGER</div>
+                <div class="top-summary-side-target">Target: £55k–£70k</div>
+              </div>
+              <div class="top-summary-side-sub">
+                Focus on data-adjacent PM, Product Analyst, and Growth PM roles at product-led tech companies and data platforms.
+              </div>
+            </div>
+          </section>
+
+          <!-- Main content columns -->
+          <main class="columns">
+            <!-- Left Column -->
+            <div class="col">
+              <!-- Section: CV & positioning -->
+              <section class="section">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-dot"></div>
+                    1. CV POSITIONING & PITCH
+                  </div>
+                  <div class="section-subtitle">From “data analyst” to “product decision-maker”</div>
+                </div>
+
+                <div class="pill">
+                  <div class="pill-label">Current story</div>
+                  <div class="pill-body">
+                    The current CV is structured as a <strong>data analyst CV</strong> — it leads with technical tools and data outputs. For PM applications, the first bullet under each role needs to lead with the <strong>business impact and decision</strong> it enabled, not the tool or method used.
+                  </div>
+                  <div class="pill-body">
+                    Example: instead of “Built Tableau dashboard for sales performance”, you want “Built Tableau dashboard used by Product Director to reallocate £8M across three product lines, improving promo efficiency and margin.”
+                  </div>
+                </div>
+
+                <ul class="list">
+                  <li class="list-item">
+                    <div class="list-bullet"></div>
+                    <div>
+                      <strong>First line of every role:</strong> What decision did you enable? Who used your work? What changed in the product, pricing, or strategy because of your analysis?
+                    </div>
+                  </li>
+                  <li class="list-item">
+                    <div class="list-bullet"></div>
+                    <div>
+                      <strong>Second line:</strong> How you did it — Python, SQL, Tableau, experimentation, stakeholder workshops, etc.
+                    </div>
+                  </li>
+                  <li class="list-item">
+                    <div class="list-bullet"></div>
+                    <div>
+                      <strong>Third line:</strong> Outcome metrics — revenue uplift, margin impact, adoption rate, churn reduction, engagement, or decision speed.
+                    </div>
+                  </li>
+                </ul>
+
+                <div class="highlight-strip">
+                  <div class="highlight-strip-label">Positioning sentence for LinkedIn / CV summary</div>
+                  <div class="highlight-strip-body">
+                    “Data professional who has spent five years informing product, pricing, and growth decisions at Unilever and Kantar. Now moving into product management to own the roadmap, not just the analysis behind it.”
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section: Target companies -->
+              <section class="section">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-dot"></div>
+                    2. TARGET COMPANIES & ROLES
+                  </div>
+                  <div class="section-subtitle">Where your profile is an immediate fit</div>
+                </div>
+
+                <div class="companies-table-wrapper">
+                  <div class="companies-table-header">
+                    <div>Company</div>
+                    <div>Role</div>
+                    <div>Why you fit</div>
+                    <div>Fit</div>
+                  </div>
+
+                  <div class="companies-table-row">
+                    <div class="companies-company">Monzo</div>
+                    <div class="companies-role">Associate PM / Growth PM</div>
+                    <div class="companies-why">Data-driven product culture, values analytical background, strong APM programme.</div>
+                    <div class="companies-fit fit-very-strong">★ Very Strong</div>
+                  </div>
+
+                  <div class="companies-table-row">
+                    <div class="companies-company">Deliveroo</div>
+                    <div class="companies-role">PM — Data & Analytics</div>
+                    <div class="companies-why">FMCG/consumer goods understanding + data skills = direct fit for consumer product team.</div>
+                    <div class="companies-fit fit-very-strong">★ Very Strong</div>
+                  </div>
+
+                  <div class="companies-table-row">
+                    <div class="companies-company">Quantexa</div>
+                    <div class="companies-role">Product Manager</div>
+                    <div class="companies-why">Data intelligence platform — product team needs deep data understanding you already have.</div>
+                    <div class="companies-fit fit-strong">★ Strong</div>
+                  </div>
+
+                  <div class="companies-table-row">
+                    <div class="companies-company">Revolut</div>
+                    <div class="companies-role">Associate PM / Growth</div>
+                    <div class="companies-why">Fast-paced, values analytical rigour, multiple PM openings regularly.</div>
+                    <div class="companies-fit fit-strong">★ Strong</div>
+                  </div>
+
+                  <div class="companies-table-row">
+                    <div class="companies-company">Palantir (London)</div>
+                    <div class="companies-role">Forward Deployed PM</div>
+                    <div class="companies-why">Python + SQL + stakeholder management = strong alignment with their PM profile.</div>
+                    <div class="companies-fit fit-strong">★ Strong</div>
+                  </div>
+
+                  <div class="companies-table-row">
+                    <div class="companies-company">Unilever Ventures</div>
+                    <div class="companies-role">Junior PM / Product Analyst</div>
+                    <div class="companies-why">Knows the brand, the culture, and has internal credibility — warm referral possible.</div>
+                    <div class="companies-fit fit-very-strong">★ Very Strong</div>
+                  </div>
+
+                  <div class="companies-table-row">
+                    <div class="companies-company">Snowflake (London)</div>
+                    <div class="companies-role">PM — Data Products</div>
+                    <div class="companies-why">Data platform product team — your SQL/data stack knowledge is a direct prerequisite.</div>
+                    <div class="companies-fit fit-good">✓ Good</div>
+                  </div>
+
+                  <div class="companies-table-row">
+                    <div class="companies-company">Treatwell</div>
+                    <div class="companies-role">Product Manager</div>
+                    <div class="companies-why">Consumer product, FMCG-adjacent, smaller team = more PM responsibility faster.</div>
+                    <div class="companies-fit fit-good">✓ Good</div>
+                  </div>
+                </div>
+
+                <div class="pill" style="margin-top: 8px;">
+                  <div class="pill-label">Role focus</div>
+                  <div class="pill-body">
+                    Your strongest entry point into PM is through <strong>data-adjacent roles</strong> — Associate PM, PM (Analytics), Product Analyst, or Growth PM — at companies that explicitly value analytics in product teams.
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section: Compensation -->
+              <section class="section">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-dot"></div>
+                    3. COMPENSATION TARGETS
+                  </div>
+                  <div class="section-subtitle">What “good” looks like in London</div>
+                </div>
+
+                <div class="comp-block">
+                  <div class="comp-row">
+                    <div class="comp-label">Associate / Junior PM</div>
+                    <div class="comp-value">£45k–£60k</div>
+                    <div class="comp-note">Often at banks, fintechs, and larger tech companies with structured PM ladders.</div>
+                  </div>
+
+                  <div class="comp-row">
+                    <div class="comp-label">Mid-Level PM</div>
+                    <div class="comp-value">£65k–£85k</div>
+                    <div class="comp-note">Expected once you have 2–3 years of product experience.</div>
+                  </div>
+
+                  <div class="comp-row">
+                    <div class="comp-label">Senior PM</div>
+                    <div class="comp-value">£85k–£110k+</div>
+                    <div class="comp-note">For owning a product area end-to-end, often with line management.</div>
+                  </div>
+
+                  <div class="comp-row" style="margin-top: 6px;">
+                    <div class="comp-label">Fintech / Data PM</div>
+                    <div class="comp-value">+10–15% vs market</div>
+                    <div class="comp-note">Monzo, Revolut, and Palantir typically pay above market with equity on top.</div>
+                  </div>
+
+                  <div class="comp-highlight">
+                    Based on your data background, you should be targeting <strong>£55k–£70k for your first PM role</strong> — do not accept below <strong>£55k</strong> unless there's exceptional learning or visa sponsorship upside.
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col">
+              <!-- Section: 6-step plan -->
+              <section class="section">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-dot"></div>
+                    4. SIX-ACTION PLAN (DO IN ORDER)
+                  </div>
+                  <div class="section-subtitle">From today to first PM offer</div>
+                </div>
+
+                <div class="numbered-list">
+                  <div class="numbered-item">
+                    <div class="numbered-index">1</div>
+                    <div class="numbered-body">
+                      <strong>Rewrite your CV to be product-first, not tools-first.</strong> For each role, lead with the product or commercial decision you enabled, then the analysis, then the tools. Aim for 8–10 bullets total, each with a clear outcome.
+                    </div>
+                  </div>
+
+                  <div class="numbered-item">
+                    <div class="numbered-index">2</div>
+                    <div class="numbered-body">
+                      <strong>Update LinkedIn headline and “About” to reflect the PM story.</strong> Use the positioning sentence from this toolkit, add “Open to: Associate PM / Product Analyst / Growth PM roles” and turn on “Open to Work” targeting London tech.
+                    </div>
+                  </div>
+
+                  <div class="numbered-item">
+                    <div class="numbered-index">3</div>
+                    <div class="numbered-body">
+                      <strong>Start a 30-day product teardown habit.</strong> Pick one product (Monzo, Deliveroo, Revolut, etc.) and write a short 200–300 word teardown each day: what problem it solves, how it could be improved, and what metrics you’d track. This builds product language fast.
+                    </div>
+                  </div>
+
+                  <div class="numbered-item">
+                    <div class="numbered-index">4</div>
+                    <div class="numbered-body">
+                      <strong>Warm up referrals at target companies.</strong> Use your FMCG and data background to connect with PMs and Product Analysts at Monzo, Deliveroo, Quantexa, and Unilever Ventures. Send short, direct messages asking for 15 minutes to learn about their path.
+                    </div>
+                  </div>
+
+                  <div class="numbered-item">
+                    <div class="numbered-index">5</div>
+                    <div class="numbered-body">
+                      <strong>Practice PM interviews (product sense + case studies).</strong> Allocate 2–3 evenings per week to run through common PM questions: “How would you improve X?”, prioritisation frameworks (RICE, impact vs effort), and metrics design for a new feature.
+                    </div>
+                  </div>
+
+                  <div class="numbered-item">
+                    <div class="numbered-index">6</div>
+                    <div class="numbered-body">
+                      <strong>Start targeted applications with customised outreach.</strong> For each role, send the CV plus a short 5–7 line email or LinkedIn message to the hiring manager or a PM on the team, referencing a product teardown you did on their product.
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section: Outreach templates -->
+              <section class="section">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-dot"></div>
+                    5. OUTREACH TEMPLATES
+                  </div>
+                  <div class="section-subtitle">5 messages you can send this week</div>
+                </div>
+
+                <div class="templates-pill">
+                  <div class="templates-label">How to use</div>
+                  <div class="templates-body">
+                    You have <strong>five ready-to-send templates</strong> — for hiring managers, PMs, ex-colleagues, recruiters, and second-degree connections. Personalise <strong>[Name]</strong> and <strong>[Company]</strong> before sending. All explicitly address the data→PM transition and why your background is a fit.
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section: Transition story -->
+              <section class="section">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-dot"></div>
+                    6. YOUR TRANSITION STORY
+                  </div>
+                  <div class="section-subtitle">How to explain “why product?” in 60 seconds</div>
+                </div>
+
+                <div class="transition-block">
+                  <div class="transition-line">
+                    Moving from data analyst to product manager is <strong>one of the most common transitions in London tech</strong>. The key is to frame your story as “I’ve already been doing product work” instead of “I want to pivot into something completely new.”
+                  </div>
+                  <div class="transition-line">
+                    <strong>Current framing:</strong> “I’m a data analyst who wants to become a PM.”
+                  </div>
+                  <div class="transition-line">
+                    <strong>Correct framing:</strong> “I’ve spent five years informing product and pricing decisions. Now I want to own the roadmap — defining problems, prioritising bets, and working with engineering and design to ship outcomes, not just dashboards.”
+                  </div>
+                  <div class="transition-line">
+                    Any data analyst who has <strong>sat in product reviews, influenced roadmaps, or run A/B tests</strong> has product experience — the title hasn’t caught up to the reality yet. Your job in interviews is to make that reality obvious.
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section: Timeline -->
+              <section class="section">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-dot"></div>
+                    7. REALISTIC TIMELINE
+                  </div>
+                  <div class="section-subtitle">How long a data→PM move usually takes</div>
+                </div>
+
+                <div class="timeline-block">
+                  <div class="timeline-row">
+                    <div class="timeline-label">Typical duration</div>
+                    <div>
+                      A data→PM transition at a credible London company usually takes <strong>3–6 months</strong> from first application to offer, because you’re building PM interview skills and a new narrative in parallel.
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-label">What to expect</div>
+                    <div>
+                      If you start now and follow this plan consistently, you should expect <strong>first-round PM interviews by Month 2</strong> and a realistic chance of an <strong>offer by Month 4–5</strong>, assuming you apply weekly and practice interviews.
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-label">Weekly cadence</div>
+                    <div>
+                      Aim for: 5–8 targeted applications per week, 2–3 product teardowns, 1–2 networking calls, and 2 interview practice sessions. Consistency matters more than intensity in a single week.
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section: Risk -->
+              <section class="section">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-dot"></div>
+                    8. BIGGEST RISK TO MANAGE
+                  </div>
+                  <div class="section-subtitle">Why strong data isn’t enough on its own</div>
+                </div>
+
+                <div class="risk-block">
+                  <div class="risk-label">Non-negotiable step</div>
+                  <div class="risk-body">
+                    The biggest risk in your transition is <strong>applying for PM roles before you can speak “product” fluently in interviews</strong>. Data skills open the door — but PM interviews test product sense, prioritisation frameworks, trade-offs, and user empathy in ways data interviews don’t.
+                  </div>
+                  <div class="risk-body" style="margin-top: 5px;">
+                    The <strong>30-day product teardown habit and case study practice</strong> are not “nice to have” — they’re the difference between being screened out at first round and getting to final panels. Do not skip them, even if you feel “ready” based on your experience.
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section: Search & toolkit -->
+              <section class="section">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-dot"></div>
+                    9. LIVE SEARCH & TOOLKIT COMMAND
+                  </div>
+                  <div class="section-subtitle">Find roles and regenerate this plan any time</div>
+                </div>
+
+                <div class="search-block">
+                  <div class="search-label">Live role search (how it works)</div>
+                  <div class="search-body">
+                    Your roles list in this toolkit was <strong>curated to match your CV</strong>, and the live search uses Claude with web search to find up-to-date job postings, score them against your profile (Python/SQL, FMCG, London, PM transition), and link directly to applications. Treat it as a <strong>shortlist generator</strong>, not the final source of truth — always confirm details on the company’s careers page.
+                  </div>
+                </div>
+
+                <div class="toolkit-footer">
+                  This is an example of what the <strong>Pit Stop Career Toolkit</strong> can generate. Paste your own CV and get a personalised plan — pitch, target companies, outreach messages, and a 90-day roadmap — in under 60 seconds.
+                  <pre><code>/career-toolkit</code></pre>
+                  <span>Run that command with your CV to regenerate and customise this plan any time.</span>
+                </div>
+              </section>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
